@@ -14,9 +14,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true}))
 app.use(express.static('images'))
 
-console.log('db: ' + process.env.DATABASE_URI)
-console.log('port: '+ process.env.PORT)
-
 // Database connection
 mongoose.connect(process.env.DATABASE_URI, {
     useNewUrlParser: true,
