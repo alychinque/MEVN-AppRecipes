@@ -1,5 +1,7 @@
 <template>
-  <hello-world />
+  <h1>
+    home page
+  </h1>
 </template>
 
 <script>
