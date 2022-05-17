@@ -2,7 +2,7 @@ const Recipe = require('../models/Recipe')
 
 const getAllRecipes = async (req, res) => {
   const recipes = await Recipe.find()
-  if (!recipes) return res.status(204).json({ 'message': 'No recipes found.' })
+  if (!recipes) return res.status(400).json({ 'message': 'No recipes found.' })
   res.json(recipes)
 }
 
@@ -29,7 +29,7 @@ const createRecipe = async (req, res) => {
 const updateRecipe = async (req, res) => {
   if (!req?.params?.id) return res.status(400).json({ 'message': 'Recipe ID required.' });
   const foundRecipe = await Recipe.findOne({ _id: req.params.id }).exec();
-  if (!foundRecipe) return res.status(204).json({ "message": `No Recipe matches ID ${req.body.id}` })
+  if (!foundRecipe) return res.status(409).json({ "message": `No Recipe matches ID ${req.body.id}` })
   try {
     foundRecipe.nameRecipe = req.body.nameRecipe
     foundRecipe.preparationTime = req.body.prep
@@ -40,8 +40,18 @@ const updateRecipe = async (req, res) => {
   } catch (err) {
     res.status(500).json({'message': err.message})
   }
-
 }
 
+const deleteRecipe = async (req, res) => {
+  if (!req?.params?.id) return res.status(400).json({ 'message': 'Recipe ID required.' });
+   const recipe = await Recipe.findOne({ _id: req.params.id }).exec();
+  if (!recipe) return res.status(409).json({"message": `No Recipe matches ID ${req.params.id}.`});
+  try{
+    const result = await recipe.deleteOne({ _id: req.params.id });
+    res.status(201).json({ 'success': `Recipe ${ recipe.nameRecipe } deleted!`})
+  } catch (err) {
+    res.status(500).json({'message': err.message})
+  }
+}
 
-module.exports = { createRecipe, getAllRecipes, updateRecipe }
+module.exports = { createRecipe, getAllRecipes, updateRecipe, deleteRecipe }

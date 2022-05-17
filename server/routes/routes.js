@@ -8,5 +8,6 @@ router.route('/')
   
 router.route('/:id')
   .put(API.updateRecipe)
+  .delete(API.deleteRecipe)
 
 module.exports = router;
