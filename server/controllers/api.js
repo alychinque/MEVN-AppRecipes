@@ -1,5 +1,11 @@
 const Recipe = require('../models/Recipe')
 
+const getAllRecipes = async (req, res) => {
+  const recipes = await Recipe.find()
+  if (!recipes) return res.status(204).json({ 'message': 'No recipes found.' })
+  res.json(recipes)
+}
+
 const createRecipe = async (req, res) => {
   const recipe = req.body
   const foundRecipe = await Recipe.findOne({ _id: req.body.id }).exec()
@@ -19,4 +25,4 @@ const createRecipe = async (req, res) => {
   }
 }
 
-module.exports = { createRecipe }
+module.exports = { createRecipe, getAllRecipes }

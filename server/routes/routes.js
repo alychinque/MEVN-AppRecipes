@@ -4,5 +4,6 @@ const API = require('../controllers/api')
 
 router.route('/')
     .post(API.createRecipe)
+    .get(API.getAllRecipes)
 
 module.exports = router;
