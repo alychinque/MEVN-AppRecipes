@@ -23,7 +23,10 @@ mongoose.connect(process.env.DATABASE_URI, {
     useUnifiedTopology: true,
 })
 .then(() => console.log('Connected to MongoDB'))
-.catch((err) => console.log(err))
+    .catch((err) => console.log(err))
+
+// Routes
+app.use('/api/', require('./routes/routes'))
 
 // Start server
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`))
