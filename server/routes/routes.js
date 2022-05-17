@@ -9,5 +9,6 @@ router.route('/')
 router.route('/:id')
   .put(API.updateRecipe)
   .delete(API.deleteRecipe)
+  .get(API.getRecipe)
 
 module.exports = router;

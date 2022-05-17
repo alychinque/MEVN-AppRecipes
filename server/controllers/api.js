@@ -54,4 +54,13 @@ const deleteRecipe = async (req, res) => {
   }
 }
 
-module.exports = { createRecipe, getAllRecipes, updateRecipe, deleteRecipe }
+
+const getRecipe = async (req, res) => {
+  if (!req?.params?.id) return res.status(400).json({ 'message': 'Recipe ID required.' });
+  const recipe = await Recipe.findOne({ _id: req.params.id }).exec();
+  if (!recipe) return res.status(409).json({ "message": `No Recipe matches ID ${req.params.id}.` });
+  res.json(recipe);
+}
+
+
+module.exports = { createRecipe, getAllRecipes, updateRecipe, deleteRecipe, getRecipe }
