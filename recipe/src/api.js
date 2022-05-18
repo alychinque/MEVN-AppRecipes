@@ -2,7 +2,7 @@ import axios from 'axios'
 const url = "/api/"
 
 export default class API{
-  static async getAllPost() {
+  static async getAllRecipes() {
     const res  = await axios.get(url);
     return res.data;
   }
