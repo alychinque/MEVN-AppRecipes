@@ -32,7 +32,7 @@ const updateRecipe = async (req, res) => {
   if (!foundRecipe) return res.status(409).json({ "message": `No Recipe matches ID ${req.body.id}` })
   try {
     foundRecipe.nameRecipe = req.body.nameRecipe
-    foundRecipe.preparationTime = req.body.prep
+    foundRecipe.preparationTime = req.body.preparationTime
     foundRecipe.steps = req.body.steps
     foundRecipe.image = req.body.image
     const result = await foundRecipe.save()

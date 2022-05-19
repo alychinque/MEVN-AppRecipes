@@ -3,7 +3,7 @@
     <v-row no-gutters>
       <v-col sm="10" class="pa-4 mx-auto">
         <v-card class="pa-2">
-          <v-img :src="`${recipe.image}`"></v-img>
+          <v-img max-height="440" max-width="440" :src="`${recipe.image}`"></v-img>
           <v-card-actions class="pb-0">
             <v-row class="mt-1 mx-1">
               <v-col sm="2">
@@ -12,9 +12,10 @@
                   {{recipe.preparationTime}}
                 </v-card-title>
               </v-col>
-              <v-col sm="10" class="d-flex justify-end">
-                <v-btn color="success" text>Edit</v-btn>
-                <v-btn color="red" text>Delete</v-btn>
+              <v-col sm="10" class="d-flex">
+                <v-btn color="success" text :to="{ name: 'edit-recipe', 
+                  params: { id: recipe._id }}">Edit</v-btn>
+                <v-btn color="red" text @click="removeRecipe(recipe._id)">Delete</v-btn>
               </v-col>
             </v-row>
           </v-card-actions>
@@ -42,6 +43,12 @@ export default {
   async created() {
     const response = await API.getRecipeByID(this.$route.params.id)
     this.recipe = response
+  },
+  methods: {
+    async removeRecipe(id){
+      const response = await API.deleteRecipe(id)
+      this.$router.push({ name: 'home', params: { message: response.message }})
+    }
   }
 }
 </script>

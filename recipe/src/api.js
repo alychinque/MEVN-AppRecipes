@@ -23,7 +23,12 @@ export default class API{
   }
 
   static async updateRecipe(id, recipe) {
-    const res = await axios.put(`${url}/${id}`, recipe)
+    const res = await axios.put(`${url}/${id}`, {
+      nameRecipe: recipe.get('nameRecipe'),
+      preparationTime: recipe.get('preparationTime'),
+      steps: recipe.get('steps'),
+      image: recipe.get('image')
+    })
     return res.data;
   }
 
