@@ -13,11 +13,11 @@ const createRecipe = async (req, res) => {
     try {
       const result = await Recipe.create({
         "nameRecipe": recipe.nameRecipe,
-        "preparationTime": recipe.prep,
+        "preparationTime": recipe.preparationTime,
         "steps": recipe.steps,
         "image": recipe.image
       })
-      res.status(201).json({ 'success': `New Recipe ${ recipe.nameRecipe } created!`})
+      res.status(201).json({ message: `New Recipe ${ recipe.nameRecipe } created!`})
     } catch (err) {
       res.status(500).json({'message': err.message})
     }

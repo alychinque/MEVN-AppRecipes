@@ -12,13 +12,18 @@ export default class API{
     return res.data;
   }
 
-  static async addRecipe(post) {
-    const res  = await axios.post(url, post);
+  static async addRecipe(recipe) {
+    const res  = await axios.post(url, {
+      nameRecipe: recipe.get('nameRecipe'),
+      preparationTime: recipe.get('preparationTime'),
+      steps: recipe.get('steps'),
+      image: recipe.get('image')
+    });
     return res.data;
   }
 
-  static async updateRecipe(id, post) {
-    const res = await axios.put(`${url}/${id}`, post)
+  static async updateRecipe(id, recipe) {
+    const res = await axios.put(`${url}/${id}`, recipe)
     return res.data;
   }
 

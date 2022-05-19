@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <v-alert close-text="Close Alert" color="green accent-4" dark
+    dismissible v-if="this.$route.params.message">
+      {{ this.$route.params.message }}
+    </v-alert>
     <v-row no-gutters>
       <v-col sm="4" class="pa-3" v-for="recipe in recipes" :key="recipe._id">
       <v-card class="pa-1" :to="{ name: 'recipe', params: { id: recipe._id }}">
